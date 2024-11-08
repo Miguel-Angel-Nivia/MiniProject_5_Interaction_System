@@ -45,17 +45,19 @@ void draw() {
   background(200);
   
   if (mousePressed) {
-    // sendOSCMessage(mouseX, mouseY);
-    sendNumberList();
+    sendOSCMessage(mouseX, mouseY);
+    // sendNumberList();
   }
 }
 
 void sendOSCMessage(int x, int y) {
   // Crea y envía el mensaje OSC
-  OscMessage msg = new OscMessage("/mouse");
-  msg.add(x);
-  msg.add(y);
-  oscP5.send(msg, pdAddress);
+  OscMessage msg1 = new OscMessage("/mouseX");
+  OscMessage msg2 = new OscMessage("/mouseY");
+  msg1.add(x);
+  msg2.add(y);
+  oscP5.send(msg1, pdAddress);
+  oscP5.send(msg2, pdAddress);
   println("Mensaje OSC enviado: X = " + x + ", Y = " + y);
 }
 
